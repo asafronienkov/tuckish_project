@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Named extends Base {
 	private static final long serialVersionUID = 1L;
-	private String name;
+	protected String name;
 
 	@Column(name = "NAME")
 	public String getName() {

@@ -6,5 +6,8 @@
 	<persistence-unit name="projectApp">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>project.common.entity.Project</class>
+		<class>project.common.entity.Type</class>
+		<class>project.common.entity.Task</class>
+		<class>project.common.entity.Part</class>
 	</persistence-unit>
 </persistence>
