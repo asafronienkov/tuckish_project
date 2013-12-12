@@ -1,0 +1,16 @@
+#compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+#eclipse environment stuff
+.settings/
+.project
+.classpath
+
+#maven-built directories
+target/
