@@ -12,13 +12,13 @@ public class Project extends Named {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "TYPE")
-	private String projectType;
+	private String type;
 
-	public String getProjectType() {
-		return projectType;
+	public String getType() {
+		return type;
 	}
 
-	public void setProjectType(String projectType) {
-		this.projectType = projectType;
+	public void setType(String projectType) {
+		this.type = projectType;
 	}
 }

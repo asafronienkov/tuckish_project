@@ -9,6 +9,7 @@
 
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="file:${test.sql}/schema.sql" />
+		<jdbc:script location="file:${test.sql}/data.sql" />
 	</jdbc:initialize-database>
 
 </beans>
