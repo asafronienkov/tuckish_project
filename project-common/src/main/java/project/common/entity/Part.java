@@ -1,6 +1,6 @@
 package project.common.entity;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "PART")
@@ -31,7 +33,7 @@ public class Part extends Named {
 	private Type type;
 
 	@ManyToMany(mappedBy = "parts")
-	private List<Task> tasks;
+	private Set<Task> tasks;
 
 	public String getManufacturer() {
 		return manufacturer;
@@ -73,11 +75,12 @@ public class Part extends Named {
 		this.type = type;
 	}
 
-	public List<Task> getTasks() {
+	@JsonIgnore
+	public Set<Task> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(List<Task> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
 }

@@ -13,9 +13,9 @@ INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
 VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1', 'Example Task 2', 'Example Description 2', null, null, 2);
 
 INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
-VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1', 'Example Task 3', 'Example Description 3', null, null, 3);
+VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 2', 'Example Task 3', 'Example Description 3', null, null, 3);
 INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
-VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1', 'Example Task 4', 'Example Description 4', null, null, 4);
+VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 2', 'Example Task 4', 'Example Description 4', null, null, 4);
 
 INSERT INTO PART (TYPE_ID, MANUFACTURER, NAME, NUMBER, DESCRIPTION, WEIGHT, COST)
 VALUES (SELECT ID FROM TYPE WHERE NAME = 'Type 1', 'Example Manufacturer 1', 'Example Part 1', 'Example Number 1', 'Example Description 1', 0.0, 1.00);

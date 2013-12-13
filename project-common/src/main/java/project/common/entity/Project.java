@@ -1,7 +1,7 @@
 package project.common.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "PROJECT")
@@ -30,7 +32,7 @@ public class Project extends Named {
 	private Type type;
 
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	List<Task> tasks;
+	Set<Task> tasks;
 
 	public String getDescription() {
 		return description;
@@ -64,11 +66,12 @@ public class Project extends Named {
 		this.type = type;
 	}
 
-	public List<Task> getTasks() {
+	@JsonIgnore
+	public Set<Task> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(List<Task> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
 }

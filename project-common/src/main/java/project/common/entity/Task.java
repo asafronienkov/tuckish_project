@@ -1,14 +1,18 @@
 package project.common.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "TASK")
@@ -32,7 +36,8 @@ public class Task extends Named {
 	private Project project;
 
 	@ManyToMany
-	private List<Part> parts;
+	@JoinTable(name = "TASK_PART", joinColumns = { @JoinColumn(name = "TASK_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "PART_ID", referencedColumnName = "ID") })
+	private Set<Part> parts;
 
 	public String getDescription() {
 		return description;
@@ -66,6 +71,7 @@ public class Task extends Named {
 		this.levelOfEffort = levelOfEffort;
 	}
 
+	@JsonIgnore
 	public Project getProject() {
 		return project;
 	}
@@ -74,11 +80,12 @@ public class Task extends Named {
 		this.project = project;
 	}
 
-	public List<Part> getParts() {
+	@JsonIgnore
+	public Set<Part> getParts() {
 		return parts;
 	}
 
-	public void setParts(List<Part> parts) {
+	public void setParts(Set<Part> parts) {
 		this.parts = parts;
 	}
 }
