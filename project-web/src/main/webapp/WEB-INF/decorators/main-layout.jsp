@@ -20,6 +20,26 @@
 <body>
 	<c:import url="/WEB-INF/include/navbar.jsp" />
 
+	<!-- 	the admin modal for types -->
+	<div class="modal fade" id="manageTypes" role="dialog" aria-labelledby="typeModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="typeModalLabel">Manage Types</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
 	<sitemesh:write property='body'/>
 
 	<div class="navbar navbar-fixed-bottom">

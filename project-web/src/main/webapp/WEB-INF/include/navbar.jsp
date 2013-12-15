@@ -18,11 +18,11 @@
 			<li><a href="<c:url value="/projects" />">Projects</a></li>
 			<li><a href="<c:url value="/about" />">About</a></li>
 		</ul>
-		<ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav pull-right">
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Manage Types</a></li>
+					<li><a href="javascript:void(0)" onclick='$("#manageTypes").modal("show");'>Manage Types</a></li>
               </ul>
             </li>
 		</ul>
