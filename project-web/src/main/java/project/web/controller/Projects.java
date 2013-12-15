@@ -31,14 +31,14 @@ public class Projects {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
-	public List<Project> getAllProjects() {
-		LOG.trace("Enter getAllProjects()");
+	public List<Project> findAll() {
+		LOG.trace("Enter findAll()");
 
 		LOG.debug("Retrieving all available projects");
 
 		List<Project> projects = baseDao.findAll(Project.class);
 
-		LOG.trace("Exit getAllProjects()");
+		LOG.trace("Exit findAll()");
 		return projects;
 	}
 
@@ -52,14 +52,14 @@ public class Projects {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/find", method = RequestMethod.GET, produces = "application/json")
-	public Project findProjectById(@RequestParam(value = "id") long id) {
-		LOG.trace("Enter findProjectById()");
+	public Project findById(@RequestParam(value = "id") long id) {
+		LOG.trace("Enter findById()");
 
 		LOG.debug("Retrieving project[id = " + id + "]");
 
 		Project project = baseDao.find(Project.class, id);
 
-		LOG.trace("Exit findProjectById()");
+		LOG.trace("Exit findById()");
 		return project;
 	}
 
@@ -72,8 +72,8 @@ public class Projects {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
-	public Project saveProject(@RequestBody Project project) {
-		LOG.trace("Enter saveProject()");
+	public Project save(@RequestBody Project project) {
+		LOG.trace("Enter save()");
 
 		// Translate the Type.ID into a real entity
 		long typeId = project.getType().getId();
@@ -91,7 +91,7 @@ public class Projects {
 			persisted = baseDao.update(Project.class, project);
 		}
 
-		LOG.trace("Exit saveProject()");
+		LOG.trace("Exit save()");
 		return persisted;
 	}
 }

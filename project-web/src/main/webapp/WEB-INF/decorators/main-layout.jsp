@@ -34,7 +34,7 @@
 					<table id="typesGrid"></table>
 					<form role="form">
 						<div class="form-group">
-							<label for="newTypeName">New Type</label>
+							<label for="newTypeName">Create a type</label>
 							<div class="input-group">
 								<input type="text" id="newTypeName" class="form-control" placeholder="Enter a name...">
 								<span class="input-group-btn">
@@ -46,7 +46,7 @@
 						<div id="newTypeAlert"></div>
 						
 						<div class="form-group">
-							<label for="updateDeleteSpan">Modify a type</label><br />
+							<label>Modify a type</label><br />
 							<p><input type="hidden" id="modifyTypeSel" class="populate placeholder" style="width:300px"></p>
 							<div class="input-group">
 								<input type="text" id="updateTypeName" class="form-control" placeholder="New name...">

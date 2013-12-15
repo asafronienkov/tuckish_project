@@ -1,5 +1,5 @@
 
-// This is a placeholder for when a users double clicks a project
+// This is a placeholder for when a users double clicks a project/task
 var selectedProject = {};
 
 clearSelProject = function() {
@@ -19,8 +19,8 @@ saveProject = function() {
 			type: {
 				id: $("#typeSel").select2("val")
 			},
-			startDate: $("#startDate").datepicker("getDate"),
-			endDate: $("#endDate").datepicker("getDate")
+			startDate: $("#projectStartDate").datepicker("getDate"),
+			endDate: $("#projectEndDate").datepicker("getDate")
 		}),
 		success: function(msg) {
 			$("#projectDetails").modal("hide");
@@ -59,10 +59,10 @@ $(document).ready(function() {
 			}
 		}
 	});
-	$("#startDate").datepicker({
+	$("#projectStartDate").datepicker({
 		dateFormat: 'yy-mm-dd'
 	});
-	$("#endDate").datepicker({
+	$("#projectEndDate").datepicker({
 		dateFormat: 'yy-mm-dd'
 	});
 	
@@ -81,7 +81,7 @@ $(document).ready(function() {
         rowNum: 10,
         rowList: [10,20,30],
         pager: '#projectsPager',
-        height: 100,
+        height: 150,
         autowidth: true,
         sortname: 'id',
         viewrecords: true,
@@ -109,8 +109,8 @@ $(document).ready(function() {
 			$("#projectName").val(selectedProject.name);
 			$("#projectDesc").val(selectedProject.description);
 			$("#typeSel").select2("val", selectedProject.type);
-			$("#startDate").datepicker("setDate", selectedProject.startDate);
-			$("#endDate").datepicker("setDate", selectedProject.endDate);
+			$("#projectStartDate").datepicker("setDate", selectedProject.startDate);
+			$("#projectEndDate").datepicker("setDate", selectedProject.endDate);
 		} else {
 			$("#projectModalLabel").html("New Project");
 			
@@ -118,8 +118,8 @@ $(document).ready(function() {
 			$("#projectName").val("");
 			$("#projectDesc").val("");
 			$("#typeSel").select2("data", null);
-			$("#startDate").datepicker("setDate", "");
-			$("#endDate").datepicker("setDate", "");
+			$("#projectStartDate").datepicker("setDate", "");
+			$("#projectEndDate").datepicker("setDate", "");
 		}
 	});
 });

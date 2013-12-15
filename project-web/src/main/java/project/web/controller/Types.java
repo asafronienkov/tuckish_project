@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.common.dao.BaseDao;
+import project.common.entity.Project;
 import project.common.entity.Type;
 
 @Controller
@@ -31,8 +34,8 @@ public class Types {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
-	public List<Type> getAllTypes() {
-		LOG.trace("Enter getAllTypes()");
+	public List<Type> findAll() {
+		LOG.trace("Enter findAll()");
 
 		LOG.debug("Retrieving all available types");
 
@@ -41,7 +44,7 @@ public class Types {
 		LOG.debug("Sorting the list of types");
 		Collections.sort(types);
 
-		LOG.trace("Exit getAllTypes()");
+		LOG.trace("Exit findAll()");
 		return types;
 	}
 
@@ -55,14 +58,14 @@ public class Types {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
-	public Type saveType(@RequestBody Type newType) {
-		LOG.trace("Enter saveType()");
+	public Type save(@RequestBody Type newType) {
+		LOG.trace("Enter save()");
 
 		LOG.debug("Saving new type: " + newType.getName());
 
 		Type persisted = baseDao.save(newType);
 
-		LOG.trace("Exit saveType()");
+		LOG.trace("Exit save()");
 		return persisted;
 	}
 
@@ -77,14 +80,14 @@ public class Types {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/update", method = RequestMethod.PUT, produces = "application/json")
-	public Type updateType(@RequestBody Type updateType) {
-		LOG.trace("Enter updateType()");
+	public Type update(@RequestBody Type updateType) {
+		LOG.trace("Enter update()");
 
 		LOG.debug("Updating type [id=" + updateType.getId() + "] with name: " + updateType.getName());
 
 		Type persisted = baseDao.update(Type.class, updateType);
 
-		LOG.trace("Exit updateType()");
+		LOG.trace("Exit update()");
 		return persisted;
 	}
 
@@ -97,12 +100,31 @@ public class Types {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public void deleteType(@RequestParam(value = "id") long id) {
-		LOG.trace("Enter deleteType()");
+	public ResponseEntity<String> delete(@RequestParam(value = "id") long id) {
+		LOG.trace("Enter delete()");
 
 		LOG.debug("Deleting type: " + id);
 
+		// Types can be associated with Projects or Parts. The type must be
+		// dereferenced before it is allowed to be deleted.
+		boolean refFound = false;
+		List<Project> projects = baseDao.findAll(Project.class);
+		for (Project project : projects) {
+			Type prjType = project.getType();
+			if (prjType != null && prjType.getId() == id) {
+				// This is a match for the type
+				refFound = true;
+			}
+		}
+
+		if (refFound) {
+			LOG.warn("Type[id = " + id + "] has references to at least one project/part. Dereference before deleting");
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+
 		baseDao.delete(Type.class, id);
-		LOG.trace("Exit deleteType()");
+
+		LOG.trace("Exit delete()");
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 }

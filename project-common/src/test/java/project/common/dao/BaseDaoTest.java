@@ -9,10 +9,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.common.entity.Project;
 import project.common.entity.Type;
 
+@Transactional
 @ContextConfiguration(locations = { "classpath:project-application.xml", "classpath:project-test.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BaseDaoTest {
