@@ -22,7 +22,7 @@
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="javascript:void(0)" onclick='$("#manageTypes").modal("show");'>Manage Types</a></li>
+					<li><a href="javascript:void(0)" onclick='openManageTypes();'>Manage Types</a></li>
               </ul>
             </li>
 		</ul>

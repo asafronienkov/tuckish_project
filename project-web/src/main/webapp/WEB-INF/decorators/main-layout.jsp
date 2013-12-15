@@ -9,10 +9,12 @@
 <title>Tuckish Projects <sitemesh:write property='title'/></title>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link type="text/css" href="public/assets/select2/select2.css" rel="stylesheet" />
 <link type="text/css" href="public/assets/css/tuckish.css" rel="stylesheet" />
 
 <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="public/assets/select2/select2.min.js"></script>
 <script type="text/javascript" src="public/assets/js/tuckish.js"></script>
 
 <sitemesh:write property='head'/>
@@ -29,12 +31,46 @@
 					<h4 class="modal-title" id="typeModalLabel">Manage Types</h4>
 				</div>
 				<div class="modal-body">
+					<table id="typesGrid"></table>
 					<form role="form">
+						<div class="form-group">
+							<label for="newTypeName">New Type</label>
+							<div class="input-group">
+								<input type="text" id="newTypeName" class="form-control" placeholder="Enter a name...">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-primary" onclick="saveType();">Save</button>
+								</span>							
+							</div>
+						</div>
+						
+						<div id="newTypeAlert"></div>
+						
+						<div class="form-group">
+							<label for="updateDeleteSpan">Modify a type</label><br />
+							<p><input type="hidden" id="modifyTypeSel" class="populate placeholder" style="width:300px"></p>
+							<div class="input-group">
+								<input type="text" id="updateTypeName" class="form-control" placeholder="New name...">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-warning" onclick="updateType();">Modify</button>
+								</span>							
+							</div>
+						</div>
+						
+						<div id="updateAlert"></div>
+						
+						<div class="form-group">
+							<label for="deleteSpan">Delete a type</label><br />
+							<span id="deleteSpan">
+								<input type="hidden" id="deleteTypeSel" class="populate placeholder" style="width:300px">
+								<button type="button" class="btn btn-danger" onclick="deleteType();">Delete</button>
+							</span>
+						</div>
+						
+						<div id="deleteAlert"></div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->

@@ -11,13 +11,11 @@
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css">
 <link type="text/css" href="public/assets/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
 <link type="text/css" href="public/assets/datepicker/css/datepicker.css" rel="stylesheet" />
-<link type="text/css" href="public/assets/select2/select2.css" rel="stylesheet" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <!-- <script type="text/javascript" src="public/assets/datepicker/js/bootstrap-datepicker.js"></script> -->
 <script type="text/javascript" src="public/assets/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script type="text/javascript" src="public/assets/jqgrid/js/i18n/grid.locale-en.js"></script>
-<script type="text/javascript" src="public/assets/select2/select2.min.js"></script>
 <script type="text/javascript" src="public/assets/js/project.js"></script>
 
 <title>Management</title>
