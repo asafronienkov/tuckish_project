@@ -1,34 +1,37 @@
 
-INSERT INTO TYPE (NAME) VALUES ('Type 1');
-INSERT INTO TYPE (NAME) VALUES ('Type 2');
+INSERT INTO TYPE (NAME) VALUES ('Automotive');
+INSERT INTO TYPE (NAME) VALUES ('Computer');
+INSERT INTO TYPE (NAME) VALUES ('Network');
+INSERT INTO TYPE (NAME) VALUES ('Software');
+INSERT INTO TYPE (NAME) VALUES ('Construction');
 
 INSERT INTO PROJECT (NAME, DESCRIPTION, START_DATE, END_DATE, TYPE_ID) 
-VALUES ('Example Project 1', 'Example Description 1', null, null, SELECT ID FROM TYPE WHERE NAME = 'Type 1');
+VALUES ('Example Project 1', 'Example Description 1', '2013-01-01', '2013-02-01', (SELECT ID FROM TYPE WHERE NAME = 'Automotive'));
 INSERT INTO PROJECT (NAME, DESCRIPTION, START_DATE, END_DATE, TYPE_ID) 
-VALUES ('Example Project 2', 'Example Description 2', null, null, SELECT ID FROM TYPE WHERE NAME = 'Type 2');
+VALUES ('Example Project 2', 'Example Description 2', '2013-03-01', '2013-04-01', (SELECT ID FROM TYPE WHERE NAME = 'Computer'));
 
 INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
-VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1', 'Example Task 1', 'Example Description 1', null, null, 1);
+VALUES ((SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1'), 'Example Task 1', 'Example Description 1', '2013-01-01', '2013-01-15', 1);
 INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
-VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1', 'Example Task 2', 'Example Description 2', null, null, 2);
+VALUES ((SELECT ID FROM PROJECT WHERE NAME = 'Example Project 1'), 'Example Task 2', 'Example Description 2', '2013-01-15', '2013-01-30', 2);
 
 INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
-VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 2', 'Example Task 3', 'Example Description 3', null, null, 3);
+VALUES ((SELECT ID FROM PROJECT WHERE NAME = 'Example Project 2'), 'Example Task 3', 'Example Description 3', '2013-02-01', '2013-02-15', 3);
 INSERT INTO TASK (PROJECT_ID, NAME, DESCRIPTION, START_DATE, END_DATE, LOE)
-VALUES (SELECT ID FROM PROJECT WHERE NAME = 'Example Project 2', 'Example Task 4', 'Example Description 4', null, null, 4);
+VALUES ((SELECT ID FROM PROJECT WHERE NAME = 'Example Project 2'), 'Example Task 4', 'Example Description 4', '2013-02-01', '2013-02-28', 4);
 
 INSERT INTO PART (TYPE_ID, MANUFACTURER, NAME, NUMBER, DESCRIPTION, WEIGHT, COST)
-VALUES (SELECT ID FROM TYPE WHERE NAME = 'Type 1', 'Example Manufacturer 1', 'Example Part 1', 'Example Number 1', 'Example Description 1', 0.0, 1.00);
+VALUES ((SELECT ID FROM TYPE WHERE NAME = 'Automotive'), 'Example Manufacturer 1', 'Example Part 1', 'Example Number 1', 'Example Description 1', 0.0, 1.00);
 INSERT INTO PART (TYPE_ID, MANUFACTURER, NAME, NUMBER, DESCRIPTION, WEIGHT, COST)
-VALUES (SELECT ID FROM TYPE WHERE NAME = 'Type 2', 'Example Manufacturer 2', 'Example Part 2', 'Example Number 2', 'Example Description 2', 0.0, 1.00);
+VALUES ((SELECT ID FROM TYPE WHERE NAME = 'Computer'), 'Example Manufacturer 2', 'Example Part 2', 'Example Number 2', 'Example Description 2', 0.0, 1.00);
 INSERT INTO PART (TYPE_ID, MANUFACTURER, NAME, NUMBER, DESCRIPTION, WEIGHT, COST)
-VALUES (SELECT ID FROM TYPE WHERE NAME = 'Type 1', 'Example Manufacturer 3', 'Example Part 3', 'Example Number 3', 'Example Description 3', 0.0, 1.00);
+VALUES ((SELECT ID FROM TYPE WHERE NAME = 'Automotive'), 'Example Manufacturer 3', 'Example Part 3', 'Example Number 3', 'Example Description 3', 0.0, 1.00);
 
 INSERT INTO TASK_PART (TASK_ID, PART_ID) 
-VALUES (SELECT ID FROM TASK WHERE NAME = 'Example Task 1', SELECT ID FROM PART WHERE NAME = 'Example Part 1');
+VALUES ((SELECT ID FROM TASK WHERE NAME = 'Example Task 1'), (SELECT ID FROM PART WHERE NAME = 'Example Part 1'));
 INSERT INTO TASK_PART (TASK_ID, PART_ID) 
-VALUES (SELECT ID FROM TASK WHERE NAME = 'Example Task 1', SELECT ID FROM PART WHERE NAME = 'Example Part 2');
+VALUES ((SELECT ID FROM TASK WHERE NAME = 'Example Task 1'), (SELECT ID FROM PART WHERE NAME = 'Example Part 2'));
 INSERT INTO TASK_PART (TASK_ID, PART_ID) 
-VALUES (SELECT ID FROM TASK WHERE NAME = 'Example Task 3', SELECT ID FROM PART WHERE NAME = 'Example Part 2');
+VALUES ((SELECT ID FROM TASK WHERE NAME = 'Example Task 3'), (SELECT ID FROM PART WHERE NAME = 'Example Part 2'));
 INSERT INTO TASK_PART (TASK_ID, PART_ID) 
-VALUES (SELECT ID FROM TASK WHERE NAME = 'Example Task 3', SELECT ID FROM PART WHERE NAME = 'Example Part 3');
+VALUES ((SELECT ID FROM TASK WHERE NAME = 'Example Task 3'), (SELECT ID FROM PART WHERE NAME = 'Example Part 3'));

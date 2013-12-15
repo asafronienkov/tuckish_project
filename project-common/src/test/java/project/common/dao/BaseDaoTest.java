@@ -32,7 +32,7 @@ public class BaseDaoTest {
 		Assert.assertNotNull(project);
 		Assert.assertEquals(1, project.getId());
 		Assert.assertEquals("Example Project 1", project.getName());
-		Assert.assertEquals("Type 1", project.getType().getName());
+		Assert.assertEquals("Automotive", project.getType().getName());
 	}
 
 	@Test
@@ -46,11 +46,11 @@ public class BaseDaoTest {
 
 		Assert.assertTrue(project1.getId() > 0);
 		Assert.assertEquals("Example Project 1", project1.getName());
-		Assert.assertEquals("Type 1", project1.getType().getName());
+		Assert.assertEquals("Automotive", project1.getType().getName());
 
 		Assert.assertTrue(project2.getId() > 0);
 		Assert.assertEquals("Example Project 2", project2.getName());
-		Assert.assertEquals("Type 2", project2.getType().getName());
+		Assert.assertEquals("Computer", project2.getType().getName());
 	}
 
 	@Test

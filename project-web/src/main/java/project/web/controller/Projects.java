@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.common.dao.BaseDao;
 import project.common.entity.Project;
+import project.common.entity.Type;
 
 @Controller
 @RequestMapping(value = "/app/projects/*")
@@ -59,5 +61,37 @@ public class Projects {
 
 		LOG.trace("Exit findProjectById()");
 		return project;
+	}
+
+	/**
+	 * Save changes to a new or existing project
+	 * 
+	 * @param project
+	 *            the JSON marshalled project from the client
+	 * @return the persisted version of the {@link Project}
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
+	public Project saveProject(@RequestBody Project project) {
+		LOG.trace("Enter saveProject()");
+
+		// Translate the Type.ID into a real entity
+		long typeId = project.getType().getId();
+		Type type = baseDao.find(Type.class, typeId);
+		project.setType(type);
+		LOG.debug("Translated type.id = " + typeId + ", to type = " + type.getName());
+
+		Project persisted = null;
+		if (project.getId() == 0) {
+			// The zero ID means it is a new project
+			LOG.debug("Saving new project");
+			persisted = baseDao.save(project);
+		} else {
+			LOG.debug("Updating existing project");
+			persisted = baseDao.update(Project.class, project);
+		}
+
+		LOG.trace("Exit saveProject()");
+		return persisted;
 	}
 }

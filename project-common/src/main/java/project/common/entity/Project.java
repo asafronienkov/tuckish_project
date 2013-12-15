@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -22,9 +24,11 @@ public class Project extends Named {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "START_DATE")
 	private Date startDate;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "END_DATE")
 	private Date endDate;
 
