@@ -1,5 +1,6 @@
 package project.web.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -36,6 +37,9 @@ public class Types {
 		LOG.debug("Retrieving all available types");
 
 		List<Type> types = baseDao.findAll(Type.class);
+
+		LOG.debug("Sorting the list of types");
+		Collections.sort(types);
 
 		LOG.trace("Exit getAllTypes()");
 		return types;

@@ -4,7 +4,7 @@ var selectedProject = {};
 
 clearSelProject = function() {
 	selectedProject = {};
-}
+};
 
 saveProject = function() {
 	$.ajax({
@@ -17,7 +17,7 @@ saveProject = function() {
 			name: $("#projectName").val(),
 			description: $("#projectDesc").val(),
 			type: {
-				id: $("#typeSel").select2("val"),
+				id: $("#typeSel").select2("val")
 			},
 			startDate: $("#startDate").datepicker("getDate"),
 			endDate: $("#endDate").datepicker("getDate")
@@ -32,7 +32,7 @@ saveProject = function() {
 			$("#projectAlert").html('<p><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Changes failed!</div></p>');
 		}
 	});
-}
+};
 
 $(document).ready(function() {
 	$("#typeSel").select2({

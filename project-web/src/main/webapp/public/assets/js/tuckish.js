@@ -56,7 +56,7 @@ updateType = function() {
 	} else {
 		$("#updateAlert").html('<p><div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>A type and updated name must be provided</div></p>');
 	}
-}
+};
 
 deleteType = function() {
 	var typeId = $("#deleteTypeSel").select2("val");
@@ -75,7 +75,7 @@ deleteType = function() {
 	} else {
 		$("#deleteAlert").html('<p><div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Select a type to delete</div></p>');
 	}
-}
+};
 
 $(document).ready(function() {
 	$("#modifyTypeSel").select2({
