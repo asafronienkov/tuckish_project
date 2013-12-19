@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tuckish Projects <sitemesh:write property='title'/></title>
+<title>Project<sitemesh:write property='title'/></title>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link type="text/css" href="public/assets/select2/select2.css" rel="stylesheet" />
@@ -78,8 +78,8 @@
 	
 	<sitemesh:write property='body'/>
 
-	<div class="navbar navbar-fixed-bottom">
-		<c:import url="/WEB-INF/include/footer.jsp" />
-	</div>
+<!-- 	<div class="navbar navbar-fixed-bottom"> -->
+<%-- 		<c:import url="/WEB-INF/include/footer.jsp" /> --%>
+<!-- 	</div> -->
 </body>
 </html>

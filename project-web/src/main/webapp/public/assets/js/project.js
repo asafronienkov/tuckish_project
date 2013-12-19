@@ -1,11 +1,4 @@
 
-// This is a placeholder for when a users double clicks a project/task
-var selectedProject = {};
-
-clearSelProject = function() {
-	selectedProject = {};
-};
-
 saveProject = function() {
 	$.ajax({
 		type: "POST",
@@ -17,25 +10,22 @@ saveProject = function() {
 			name: $("#projectName").val(),
 			description: $("#projectDesc").val(),
 			type: {
-				id: $("#typeSel").select2("val")
+				id: $("#projectTypeSel").select2("val")
 			},
 			startDate: $("#projectStartDate").datepicker("getDate"),
 			endDate: $("#projectEndDate").datepicker("getDate")
 		}),
 		success: function(msg) {
-			$("#projectDetails").modal("hide");
 			$("#projectAlert").html('<p><div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Changes saved!</div></p>');
-			$("#projectsGrid").trigger("reloadGrid");
 		},
 		error: function(msg) {
-			$("#projectDetails").modal("hide");
 			$("#projectAlert").html('<p><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Changes failed!</div></p>');
 		}
 	});
 };
 
 $(document).ready(function() {
-	$("#typeSel").select2({
+	$("#projectTypeSel").select2({
 		placeholder: "Select a type...",
 		allowClear: true,
 		ajax: {
@@ -53,10 +43,7 @@ $(document).ready(function() {
 			}
 		},
 		initSelection : function (element, callback) {
-			if (!$.isEmptyObject(selectedProject)) {
-				var data = {id: selectedProject.type.id, text: selectedProject.type.name};
-		        callback(data);
-			}
+	        callback(JSON.parse(element.val()));
 		}
 	});
 	$("#projectStartDate").datepicker({
@@ -64,62 +51,5 @@ $(document).ready(function() {
 	});
 	$("#projectEndDate").datepicker({
 		dateFormat: 'yy-mm-dd'
-	});
-	
-	$("#projectsGrid").jqGrid({
-		url:'app/projects/all',
-		datatype: "json",
-		colNames:['ID', 'NAME', 'DESCRIPTION', 'TYPE', 'START', 'END'],
-		colModel:[
-			{name: 'id', index: 'id', hidden: true},
-			{name: 'name', index: 'name'},
-			{name: 'description', index: 'description'},
-			{name: 'type', index: 'type', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }},
-			{name: 'startDate', index: 'startDate'},
-			{name: 'endDate', index: 'endDate'}
-        ],
-        rowNum: 10,
-        rowList: [10,20,30],
-        pager: '#projectsPager',
-        height: 150,
-        autowidth: true,
-        sortname: 'id',
-        viewrecords: true,
-        sortorder: "desc",
-        caption: "Projects",
-        ondblClickRow: function(rowid, rowIdx, colIdx, event) {
-        	$.ajax({
-        		type: "GET",
-        		url: "app/projects/find",
-        		data: {id: rowid},
-        		dataType: "json"
-        	}).done(function(data) {
-        		selectedProject = data;
-        		$("#projectDetails").modal("show");
-        	});
-        }
-	});
-	$("#projectsGrid").jqGrid('navGrid', '#projectsPager', { edit:false, add:false, del:false });
-	
-	$("#projectDetails").on("show.bs.modal", function(e) {
-		if (!$.isEmptyObject(selectedProject)) {
-			$("#projectModalLabel").html("Edit Project");
-			
-			$("#projectId").val(selectedProject.id);
-			$("#projectName").val(selectedProject.name);
-			$("#projectDesc").val(selectedProject.description);
-			$("#typeSel").select2("val", selectedProject.type);
-			$("#projectStartDate").datepicker("setDate", selectedProject.startDate);
-			$("#projectEndDate").datepicker("setDate", selectedProject.endDate);
-		} else {
-			$("#projectModalLabel").html("New Project");
-			
-			$("#projectId").val("");
-			$("#projectName").val("");
-			$("#projectDesc").val("");
-			$("#typeSel").select2("data", null);
-			$("#projectStartDate").datepicker("setDate", "");
-			$("#projectEndDate").datepicker("setDate", "");
-		}
 	});
 });

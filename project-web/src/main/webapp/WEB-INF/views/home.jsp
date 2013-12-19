@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
+<title> Home</title>
 </head>
 <body>
 	<div class="jumbotron">

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,5 +95,31 @@ public class Projects {
 
 		LOG.trace("Exit save()");
 		return persisted;
+	}
+
+	/**
+	 * Deletes a {@link Project} given the ID finds a valid project
+	 * 
+	 * @param id
+	 *            the ID of the {@link Project} to delete
+	 * @return {@link ResponseEntity} with the following status codes: <br>
+	 *         200: Delete completed<br>
+	 *         304: Unable to find a matching project<br>
+	 *         400: Invalid project id
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@RequestParam(value = "id") long id) {
+		if (id == 0) {
+			return new ResponseEntity<String>("Invalid Project ID", HttpStatus.BAD_REQUEST);
+		}
+
+		Project toDelete = baseDao.find(Project.class, id);
+		if (toDelete == null) {
+			return new ResponseEntity<String>("Unable to find project with id: " + id, HttpStatus.NOT_MODIFIED);
+		}
+
+		baseDao.delete(Project.class, toDelete.getId());
+
+		return new ResponseEntity<String>("Success", HttpStatus.OK);
 	}
 }
