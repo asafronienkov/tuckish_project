@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import project.common.entity.Base;
  */
 @Repository
 @Transactional
+@Qualifier(value = "base")
 public class BaseDaoImpl implements BaseDao {
 	private static final Logger LOG = Logger.getLogger(BaseDaoImpl.class);
 

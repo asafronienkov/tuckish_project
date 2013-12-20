@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,8 @@ public class Types {
 	private static final Logger LOG = Logger.getLogger(Types.class);
 
 	@Autowired
-	private BaseDao baseDao;
+	@Qualifier(value = "base")
+	private BaseDao dao;
 
 	/**
 	 * This controller method responds to REST calls for all available
@@ -39,7 +41,7 @@ public class Types {
 
 		LOG.debug("Retrieving all available types");
 
-		List<Type> types = baseDao.findAll(Type.class);
+		List<Type> types = dao.findAll(Type.class);
 
 		LOG.debug("Sorting the list of types");
 		Collections.sort(types);
@@ -63,7 +65,7 @@ public class Types {
 
 		LOG.debug("Saving new type: " + newType.getName());
 
-		Type persisted = baseDao.save(newType);
+		Type persisted = dao.save(newType);
 
 		LOG.trace("Exit save()");
 		return persisted;
@@ -85,7 +87,7 @@ public class Types {
 
 		LOG.debug("Updating type [id=" + updateType.getId() + "] with name: " + updateType.getName());
 
-		Type persisted = baseDao.update(Type.class, updateType);
+		Type persisted = dao.update(Type.class, updateType);
 
 		LOG.trace("Exit update()");
 		return persisted;
@@ -108,7 +110,7 @@ public class Types {
 		// Types can be associated with Projects or Parts. The type must be
 		// dereferenced before it is allowed to be deleted.
 		boolean refFound = false;
-		List<Project> projects = baseDao.findAll(Project.class);
+		List<Project> projects = dao.findAll(Project.class);
 		for (Project project : projects) {
 			Type prjType = project.getType();
 			if (prjType != null && prjType.getId() == id) {
@@ -122,7 +124,7 @@ public class Types {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 
-		baseDao.delete(Type.class, id);
+		dao.delete(Type.class, id);
 
 		LOG.trace("Exit delete()");
 		return new ResponseEntity<String>(HttpStatus.OK);

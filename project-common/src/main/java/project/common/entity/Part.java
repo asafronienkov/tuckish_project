@@ -14,7 +14,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @Table(name = "PART")
 @XmlRootElement
-public class Part extends Named {
+public class Part extends Named implements Comparable<Part> {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "MANUFACTURER")
@@ -82,5 +82,15 @@ public class Part extends Named {
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(Part o) {
+		return name.compareToIgnoreCase(o.getName());
 	}
 }

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +21,17 @@ import project.common.entity.Type;
 public class BaseDaoTest {
 
 	@Autowired
-	private BaseDao baseDao;
+	@Qualifier(value = "base")
+	private BaseDao dao;
 
 	@Before
 	public void setup() {
-		Assert.assertNotNull(baseDao);
+		Assert.assertNotNull(dao);
 	}
 
 	@Test
 	public void testFind() {
-		Project project = baseDao.find(Project.class, 1);
+		Project project = dao.find(Project.class, 1);
 
 		Assert.assertNotNull(project);
 		Assert.assertEquals(1, project.getId());
@@ -39,7 +41,7 @@ public class BaseDaoTest {
 
 	@Test
 	public void testFindAll() {
-		List<Project> projects = baseDao.findAll(Project.class);
+		List<Project> projects = dao.findAll(Project.class);
 
 		Assert.assertTrue(projects.size() == 2);
 
@@ -58,13 +60,13 @@ public class BaseDaoTest {
 	@Test
 	public void testSave() {
 		String name = "New Project 1";
-		Type type = baseDao.find(Type.class, 1);
+		Type type = dao.find(Type.class, 1);
 
 		Project newPrj = new Project();
 		newPrj.setName(name);
 		newPrj.setType(type);
 
-		Project persisted = baseDao.save(newPrj);
+		Project persisted = dao.save(newPrj);
 
 		Assert.assertTrue(persisted.getId() > 0);
 		Assert.assertEquals(name, persisted.getName());
@@ -74,18 +76,18 @@ public class BaseDaoTest {
 	@Test
 	public void testUpdate() {
 		String name = "Updated Project 1";
-		Type type = baseDao.find(Type.class, 2);
+		Type type = dao.find(Type.class, 2);
 
 		Project newPrj = new Project();
 		newPrj.setName("To Be Upate");
-		newPrj.setType(baseDao.find(Type.class, 1));
+		newPrj.setType(dao.find(Type.class, 1));
 
-		Project persisted = baseDao.save(newPrj);
+		Project persisted = dao.save(newPrj);
 
 		persisted.setName(name);
 		persisted.setType(type);
 
-		Project updated = baseDao.update(Project.class, persisted);
+		Project updated = dao.update(Project.class, persisted);
 
 		Assert.assertTrue(updated.getId() > 0);
 		Assert.assertEquals(name, updated.getName());
@@ -96,13 +98,13 @@ public class BaseDaoTest {
 	public void testDelete() {
 		Project newPrj = new Project();
 		newPrj.setName("To Be Deleted");
-		newPrj.setType(baseDao.find(Type.class, 1));
+		newPrj.setType(dao.find(Type.class, 1));
 
-		Project persisted = baseDao.save(newPrj);
+		Project persisted = dao.save(newPrj);
 
-		baseDao.delete(Project.class, persisted.getId());
+		dao.delete(Project.class, persisted.getId());
 
-		Project deleted = baseDao.find(Project.class, persisted.getId());
+		Project deleted = dao.find(Project.class, persisted.getId());
 
 		Assert.assertNull(deleted);
 	}

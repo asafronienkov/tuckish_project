@@ -8,19 +8,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Project<sitemesh:write property='title'/></title>
 
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-<link type="text/css" href="public/assets/select2/select2.css" rel="stylesheet" />
-<link type="text/css" href="public/assets/css/tuckish.css" rel="stylesheet" />
+<link type="text/css" href="<c:url value="/public/assets/bootstrap/css/bootstrap.min.css" />" rel="stylesheet" />
+<link type="text/css" href="<c:url value="/public/assets/select2/select2.css" />" rel="stylesheet" />
+<link type="text/css" href="<c:url value="/public/assets/css/tuckish.css" />" rel="stylesheet" />
 
-<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="public/assets/select2/select2.min.js"></script>
-<script type="text/javascript" src="public/assets/js/tuckish.js"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/jquery/jquery-2.0.3.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/bootstrap/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/select2/select2.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/js/tuckish.js" />"></script>
 
 <sitemesh:write property='head'/>
 </head>
 <body>
 	<c:import url="/WEB-INF/include/navbar.jsp" />
+
+	<img src="public/assets/images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+
+	<div class="modal fade" id="generalError">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Error</h4>
+				</div>
+				<div class="modal-body">
+					<p>
+						<div id="genErrBody"></div>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
 	<!-- 	the admin modal for types -->
 	<div class="modal fade" id="manageTypes" role="dialog" aria-labelledby="typeModalLabel" aria-hidden="true">

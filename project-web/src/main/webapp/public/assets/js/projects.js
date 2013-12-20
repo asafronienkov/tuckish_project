@@ -3,7 +3,7 @@ loadProject = function(projectId) {
 	window.location = '/project/project?id=' + projectId;
 };
 
-saveProject = function() {
+saveNewProject = function() {
 	$.ajax({
 		type: "POST",
 		url: "app/projects/save",
@@ -19,14 +19,13 @@ saveProject = function() {
 			startDate: $("#projectStartDate").datepicker("getDate"),
 			endDate: $("#projectEndDate").datepicker("getDate")
 		}),
-		success: function(msg) {
+		success: function(data) {
 			$("#projectDetails").modal("hide");
-			$("#projectAlert").html('<p><div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Changes saved!</div></p>');
-			$("#projectsGrid").trigger("reloadGrid");
+			loadProject(data.id);
 		},
 		error: function(msg) {
 			$("#projectDetails").modal("hide");
-			$("#projectAlert").html('<p><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Changes failed!</div></p>');
+			$("#projectAlert").html('<p><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Failed to create new project: ' + msg + '</div></p>');
 		}
 	});
 };
@@ -83,7 +82,7 @@ $(document).ready(function() {
 		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'TYPE', 'START', 'END'],
 		colModel:[
 			{name: 'id', index: 'id', hidden: true},
-			{name: 'act', index: 'act', width: 75},
+			{name: 'act', index: 'act', width: 110},
 			{name: 'name', index: 'name'},
 			{name: 'description', index: 'description'},
 			{name: 'type', index: 'type', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }},
@@ -105,9 +104,75 @@ $(document).ready(function() {
         		var cl = ids[i];
         		edit = '<button type="button" class="btn btn-info btn-sm" onclick="loadProject(' + cl + ');">Edit</button>';
         		del = '<button type="button" class="btn btn-danger btn-sm" onclick="deleteProject(' + cl + ');">Delete</button>';
-        		jQuery("#projectsGrid").jqGrid('setRowData', ids[i], {act: edit + del});
+        		jQuery("#projectsGrid").jqGrid('setRowData', ids[i], {act: " " + edit + " " + del + " "});
         	}
         }
 	});
 	$("#projectsGrid").jqGrid('navGrid', '#projectsPager', { edit:false, add:false, del:false });
+	
+	$("#tasksGrid").jqGrid({
+		url:'app/tasks/all',
+		datatype: "json",
+		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'START', 'END', 'LOE'],
+		colModel:[
+			{name: 'id', index: 'id', hidden: true},
+			{name: 'act', index: 'act', width: 110},
+			{name: 'name', index: 'name'},
+			{name: 'description', index: 'description'},
+			{name: 'startDate', index: 'startDate'},
+			{name: 'endDate', index: 'endDate'},
+			{name: 'levelOfEffort', index: 'levelOfEffort'}
+        ],
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        pager: '#tasksPager',
+        height: 150,
+        autowidth: true,
+        sortname: 'id',
+        viewrecords: true,
+        sortorder: "desc",
+        caption: "Tasks",
+        gridComplete: function() {
+        	var ids = jQuery("#tasksGrid").jqGrid('getDataIDs');
+        	for (var i = 0; i < ids.length; i++) {
+        		var cl = ids[i];
+        		edit = '<button type="button" class="btn btn-info btn-sm" onclick="loadTask(' + cl + ');">Edit</button>';
+        		del = '<button type="button" class="btn btn-danger btn-sm" onclick="deleteTask(' + cl + ');">Delete</button>';
+        		jQuery("#tasksGrid").jqGrid('setRowData', ids[i], {act: " " + edit + " " + del + " "});
+        	}
+        }
+	});
+	$("#tasksGrid").jqGrid('navGrid', '#tasksPager', { edit:false, add:false, del:false });
+	
+	$("#partsGrid").jqGrid({
+		url:'app/parts/all',
+		datatype: "json",
+		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'TYPE'],
+		colModel:[
+			{name: 'id', index: 'id', hidden: true},
+			{name: 'act', index: 'act', width: 110},
+			{name: 'name', index: 'name'},
+			{name: 'description', index: 'description'},
+			{name: 'type', index: 'type', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }}
+        ],
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        pager: '#partsPager',
+        height: 150,
+        autowidth: true,
+        sortname: 'id',
+        viewrecords: true,
+        sortorder: "desc",
+        caption: "Parts",
+        gridComplete: function() {
+        	var ids = jQuery("#partsGrid").jqGrid('getDataIDs');
+        	for (var i = 0; i < ids.length; i++) {
+        		var cl = ids[i];
+        		edit = '<button type="button" class="btn btn-info btn-sm" onclick="loadPart(' + cl + ');">Edit</button>';
+        		del = '<button type="button" class="btn btn-danger btn-sm" onclick="deletePart(' + cl + ');">Delete</button>';
+        		jQuery("#partsGrid").jqGrid('setRowData', ids[i], {act: " " + edit + " " + del + " "});
+        	}
+        }
+	});
+	$("#partsGrid").jqGrid('navGrid', '#partsPager', { edit:false, add:false, del:false });
 });

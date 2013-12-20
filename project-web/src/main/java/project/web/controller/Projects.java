@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,8 @@ public class Projects {
 	private static final Logger LOG = Logger.getLogger(Projects.class);
 
 	@Autowired
-	private BaseDao baseDao;
+	@Qualifier(value = "base")
+	private BaseDao dao;
 
 	/**
 	 * This method responds to REST calls for all available {@link Project}
@@ -38,7 +40,7 @@ public class Projects {
 
 		LOG.debug("Retrieving all available projects");
 
-		List<Project> projects = baseDao.findAll(Project.class);
+		List<Project> projects = dao.findAll(Project.class);
 
 		LOG.trace("Exit findAll()");
 		return projects;
@@ -59,7 +61,7 @@ public class Projects {
 
 		LOG.debug("Retrieving project[id = " + id + "]");
 
-		Project project = baseDao.find(Project.class, id);
+		Project project = dao.find(Project.class, id);
 
 		LOG.trace("Exit findById()");
 		return project;
@@ -79,7 +81,7 @@ public class Projects {
 
 		// Translate the Type.ID into a real entity
 		long typeId = project.getType().getId();
-		Type type = baseDao.find(Type.class, typeId);
+		Type type = dao.find(Type.class, typeId);
 		project.setType(type);
 		LOG.debug("Translated type.id = " + typeId + ", to type = " + type.getName());
 
@@ -87,10 +89,10 @@ public class Projects {
 		if (project.getId() == 0) {
 			// The zero ID means it is a new project
 			LOG.debug("Saving new project");
-			persisted = baseDao.save(project);
+			persisted = dao.save(project);
 		} else {
 			LOG.debug("Updating existing project");
-			persisted = baseDao.update(Project.class, project);
+			persisted = dao.update(Project.class, project);
 		}
 
 		LOG.trace("Exit save()");
@@ -113,12 +115,12 @@ public class Projects {
 			return new ResponseEntity<String>("Invalid Project ID", HttpStatus.BAD_REQUEST);
 		}
 
-		Project toDelete = baseDao.find(Project.class, id);
+		Project toDelete = dao.find(Project.class, id);
 		if (toDelete == null) {
 			return new ResponseEntity<String>("Unable to find project with id: " + id, HttpStatus.NOT_MODIFIED);
 		}
 
-		baseDao.delete(Project.class, toDelete.getId());
+		dao.delete(Project.class, toDelete.getId());
 
 		return new ResponseEntity<String>("Success", HttpStatus.OK);
 	}

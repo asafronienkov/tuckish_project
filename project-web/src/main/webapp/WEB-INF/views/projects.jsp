@@ -7,21 +7,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<!-- <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css"> -->
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css">
-<link type="text/css" href="public/assets/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
-<link type="text/css" href="public/assets/datepicker/css/datepicker.css" rel="stylesheet" />
+<link type="text/css" href="<c:url value="/public/assets/jquery/ui/css/smoothness/jquery-ui-1.10.3.custom.min.css" />" rel="stylesheet" /> 
+<link type="text/css" href="<c:url value="/public/assets/jqgrid/css/ui.jqgrid.css" />" rel="stylesheet" />
+<link type="text/css" href="<c:url value="/public/assets/datepicker/css/datepicker.css" />" rel="stylesheet" />
 
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script type="text/javascript" src="public/assets/jqgrid/js/jquery.jqGrid.min.js"></script>
-<script type="text/javascript" src="public/assets/jqgrid/js/i18n/grid.locale-en.js"></script>
-<script type="text/javascript" src="public/assets/js/projects.js"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/jquery/ui/js/jquery-ui-1.10.3.custom.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/jqgrid/js/jquery.jqGrid.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/jqgrid/js/i18n/grid.locale-en.js" />"></script>
+<script type="text/javascript" src="<c:url value="/public/assets/js/projects.js" />"></script>
 
 <title>s</title>
 </head>
 <body>
 	<p>
-		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#projectDetails" onclick="clearSelProject();">Create Project</button>
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#projectDetails">Create Project</button>
 	</p>
 	<p>
 		<div id="projectAlert"></div>
@@ -62,7 +61,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="saveProject();">Save changes</button>
+					<button type="button" class="btn btn-primary" onclick="saveNewProject();">Save Changes</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
@@ -72,6 +71,16 @@
 	<p>
 		<table id="projectsGrid"></table>
 		<div id="projectsPager"></div>
+	</p>
+	<!-- Tasks Grid -->
+	<p>
+		<table id="tasksGrid"></table>
+		<div id="tasksPager"></div>
+	</p>
+	<!-- Parts Grid -->
+	<p>
+		<table id="partsGrid"></table>
+		<div id="partsPager"></div>
 	</p>
 </body>
 </html>

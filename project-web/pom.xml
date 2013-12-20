@@ -23,6 +23,8 @@
 					<sourceJsFolder>${basedir}/src/main/webapp/public/assets/js</sourceJsFolder>
 					<failOnWarning>false</failOnWarning>
 					<excludes>
+						<exclude>**/jquery/**/*.js</exclude>
+						<exclude>**/bootstrap/js/*.js</exclude>
 						<exclude>**/select2*.js</exclude>
 						<exclude>**/jqgrid/**/*.js</exclude>
 						<exclude>**/datepicker/**/*.js</exclude>

@@ -15,7 +15,7 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="<c:url value="/" />">Home</a></li>
-			<li><a href="<c:url value="/projects" />">Projects</a></li>
+<%-- 			<li><a href="<c:url value="/projects" />">Projects</a></li> --%>
 			<li><a href="<c:url value="/about" />">About</a></li>
 		</ul>
 		<ul class="nav navbar-nav pull-right">
