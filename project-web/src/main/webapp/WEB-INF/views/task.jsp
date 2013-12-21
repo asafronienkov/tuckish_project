@@ -25,10 +25,10 @@
 		var projectId = ${project.id};
 	</script>
 	
-	<c:url var="projectUrl" value="" >
+	<c:url var="projectUrl" value="project" >
 		<c:param name="id" value="${project.id}" />
 	</c:url>
-	
+
 	<ol class="breadcrumb">
 		<li><a href="<c:url value="/projects" />">Projects</a></li>
 		<li><a href="<c:url value="${projectUrl}" />">${project.name}</a></li>
