@@ -7,6 +7,18 @@ $(document).ajaxComplete(function(event, request, settings) {
     $('#loading-indicator').hide();
 });
 
+loadProject = function(projectId) {
+	window.location = '/project/project?id=' + projectId;
+};
+
+loadTask = function(taskId) {
+	window.location = '/project/task?id=' + taskId;
+};
+
+deleteTask = function(taskId) {
+	alert("Not yet implemented...");
+};
+
 openManageTypes = function() {
 	$("#newTypeName").val("");
 	$("#updateTypeName").val("");

@@ -1,8 +1,4 @@
 
-loadTask = function(taskId) {
-	window.location = '/project/task?id=' + taskId;
-};
-
 saveProject = function() {
 	$.ajax({
 		type: "POST",
@@ -149,12 +145,4 @@ $(document).ready(function() {
         }
 	});
 	$("#tasksGrid").jqGrid('navGrid', '#tasksPager', { edit:false, add:false, del:false });
-	
-	// Task Modal specific
-	$("#taskStartDate").datepicker({
-		dateFormat: 'yy-mm-dd'
-	});
-	$("#taskEndDate").datepicker({
-		dateFormat: 'yy-mm-dd'
-	});
 });

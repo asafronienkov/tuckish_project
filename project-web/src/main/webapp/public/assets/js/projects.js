@@ -1,8 +1,4 @@
 
-loadProject = function(projectId) {
-	window.location = '/project/project?id=' + projectId;
-};
-
 saveNewProject = function() {
 	$.ajax({
 		type: "POST",
@@ -30,10 +26,10 @@ saveNewProject = function() {
 	});
 };
 
-deleteProject = function(id) {
+deleteProject = function(projectId) {
 	$.ajax({
 		type: "DELETE",
-		url: "app/projects/delete?id=" + id,
+		url: "app/projects/delete?id=" + projectId,
 		success: function(msg) {
 			$("#projectAlert").html('<p><div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Project deleted!</div></p>');
 			$("#projectsGrid").trigger("reloadGrid");
