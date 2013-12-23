@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import project.common.entity.Part;
 import project.common.entity.Project;
 import project.common.entity.Task;
 import project.common.exception.BusinessException;
@@ -43,5 +44,38 @@ public class TaskDaoImpl extends BaseDaoImpl implements TaskDao {
 
 		LOG.trace("Exit findByProject()");
 		return tasks;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see project.common.dao.TaskDao#addPart(long, long)
+	 */
+	@Override
+	public Task addPart(long taskId, long partId) throws BusinessException {
+		LOG.trace("Enter addPart()");
+
+		// Look up required objects
+		Task task = find(Task.class, taskId);
+		Part part = find(Part.class, partId);
+		Task persisted = null;
+
+		if (task == null || part == null) {
+			throw new BusinessException("Unable to find matching Task/Part pair");
+		}
+
+		if (!part.getTasks().contains(task) && !task.getParts().contains(part)) {
+			LOG.debug("Associating part[" + partId + "] with task[" + taskId + "]");
+			part.getTasks().add(task);
+			task.getParts().add(part);
+
+			persisted = save(task);
+			// save(part);
+		} else {
+			throw new BusinessException("The task already contains the requested part");
+		}
+
+		LOG.trace("Exit addPart()");
+		return persisted;
 	}
 }

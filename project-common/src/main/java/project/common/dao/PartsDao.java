@@ -19,4 +19,30 @@ public interface PartsDao extends BaseDao {
 	 *             when the given {@link Task} is not found
 	 */
 	Set<Part> findByTask(long taskId) throws BusinessException;
+
+	/**
+	 * Creates a new {@link Part} and associates it with a {@link Task}
+	 * 
+	 * @param taskId
+	 *            the ID of the parent {@link Task}
+	 * @param part
+	 *            the {@link Part} to create
+	 */
+	void saveTaskPart(long taskId, Part part);
+
+	/**
+	 * 
+	 * @param part
+	 * @return
+	 * @throws BusinessException 
+	 */
+	Part updatePart(Part part) throws BusinessException;
+
+	/**
+	 * 
+	 * @param taskId
+	 * @param partId
+	 * @throws BusinessException
+	 */
+	void removePart(long taskId, long partId) throws BusinessException;
 }

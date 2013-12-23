@@ -30,7 +30,6 @@
 	<div id="projectAlert"></div>
 	
 	<div class="panel panel-primary">
-		<!-- 		<div class="panel-heading">Details</div> -->
 		<div class="panel panel-body">
 			<form role="form">
 				<div class="form-group">
@@ -73,7 +72,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="taskModalLabel"></h4>
+					<h4 class="modal-title" id="taskModalLabel">New Task</h4>
 				</div>
 				<div class="modal-body">
 					<form role="form">

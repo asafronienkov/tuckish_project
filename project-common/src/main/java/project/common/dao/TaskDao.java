@@ -18,4 +18,6 @@ public interface TaskDao extends BaseDao {
 	 *             when the given {@link Project} is not found
 	 */
 	List<Task> findByProject(long projectId) throws BusinessException;
+
+	Task addPart(long taskId, long partId) throws BusinessException;
 }

@@ -1,6 +1,7 @@
 package project.common.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -36,7 +37,7 @@ public class Project extends Named {
 	private Type type;
 
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	Set<Task> tasks;
+	Set<Task> tasks = new HashSet<Task>();
 
 	public String getDescription() {
 		return description;

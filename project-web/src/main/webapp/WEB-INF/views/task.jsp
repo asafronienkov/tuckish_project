@@ -38,7 +38,6 @@
 	<div id="taskAlert"></div>
 	
 	<div class="panel panel-primary">
-		<!-- 		<div class="panel-heading">Details</div> -->
 		<div class="panel panel-body">
 			<form role="form">
 				<input type="hidden" id="projectId" value="${project.id}">
@@ -59,11 +58,15 @@
 					<label for="taskEndDate">End Date</label><br />
 					<input type="text" id="taskEndDate" class="datepicker">
 				</div>
+				<div class="form-group">
+					<label for="taskLOE">Level Of Effort</label><br />
+					<input type="number" id="taskLOE" class="form-control" placeholder="Enter a LOE...">
+				</div>
 			</form>
 			<p>
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="partDetails">Add Part</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" onclick="newPart();">Add Part</button>
 			</p>
-			<!-- 	Tasks Grid -->
+			<!-- 	Parts Grid -->
 			<table id="partsGrid"></table>
 			<div id="partsPager"></div>
 		</div>
@@ -79,27 +82,65 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="partModalLabel"></h4>
+					<h4 class="modal-title" id="partModalLabel">Parts</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form">
-						<input type="hidden" id="projectId" value="${project.id}">
-						<input type="hidden" id="taskId" value="${task.id}">
-						<input type="hidden" id="partId">
-						<div class="form-group">
-							<label for="taskName">Name</label>
-							<input type="text" id="taskName" class="form-control" placeholder="Task Name...">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Existing Part</div>
+						<div class="panel panel-body">
+							<div class="form-group">
+								<label for="partSel">Type</label><br />
+								<input type="hidden" id="partSel" class="populate placeholder" style="width:300px">
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="taskDesc">Description</label>
-							<textarea id="taskDesc" class="form-control" rows="3" placeholder="Task Description..."></textarea>
+						<div class="panel-footer">
+							<button type="button" class="btn btn-primary" onclick="addPart();">Save Changes</button>
 						</div>
-					</form>
+					</div>
+					<div class="panel panel-primary">
+						<div id="partHeading" class="panel-heading"></div>
+						<div class="panel panel-body">
+							<form role="form">
+								<input type="hidden" id="taskId" value="${task.id}">
+								<input type="hidden" id="partId">
+								<div class="form-group">
+									<label for="partName">Name</label>
+									<input type="text" id="partName" class="form-control" placeholder="Part Name...">
+								</div>
+								<div class="form-group">
+									<label for="partManu">Manufacturer</label>
+									<input type="text" id="partManu" class="form-control" placeholder="Part Manufacturer...">
+								</div>
+								<div class="form-group">
+									<label for="partNumber">Number</label>
+									<input type="text" id="partNumber" class="form-control" placeholder="Part Number...">
+								</div>
+								<div class="form-group">
+									<label for="partCost">Cost</label>
+									<div class="input-group">
+										<span class="input-group-addon">$</span>
+										<input type="number" id="partCost" class="form-control" placeholder="Part Cost...">
+										<span class="input-group-addon">.00</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="partWeight">Weight</label>
+									<input type="number" id="partWeight" class="form-control" placeholder="Part Weight...">
+								</div>
+								<div class="form-group">
+									<label for="partTypeSel">Type</label><br />
+									<input type="hidden" id="partTypeSel" class="populate placeholder" style="width:300px">
+								</div>
+							</form>
+						</div>
+						<div class="panel-footer">
+							<button type="button" class="btn btn-primary" onclick="savePart();">Save Changes</button>
+						</div>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="savePart();">Save Changes</button>
-				</div>
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!-- 				</div> -->
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->

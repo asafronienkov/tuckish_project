@@ -1,5 +1,6 @@
 package project.common.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class Part extends Named implements Comparable<Part> {
 	private Type type;
 
 	@ManyToMany(mappedBy = "parts")
-	private Set<Task> tasks;
+	private Set<Task> tasks = new HashSet<Task>();
 
 	public String getManufacturer() {
 		return manufacturer;

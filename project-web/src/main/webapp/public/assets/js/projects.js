@@ -61,12 +61,6 @@ $(document).ready(function() {
 				});
 				return {results: formattedData};
 			}
-		},
-		initSelection : function (element, callback) {
-			if (!$.isEmptyObject(selectedProject)) {
-				var data = {id: selectedProject.type.id, text: selectedProject.type.name};
-		        callback(data);
-			}
 		}
 	});
 	$("#projectStartDate").datepicker({

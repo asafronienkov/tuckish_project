@@ -137,6 +137,30 @@ public class Tasks {
 	}
 
 	/**
+	 * 
+	 * @param taskId
+	 * @param partId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/addPart", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Task> addPart(@RequestParam(value = "taskId") long taskId,
+			@RequestParam(value = "partId") long partId) {
+		if (taskId == 0 || partId == 0) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		Task persisted = null;
+		try {
+			persisted = dao.addPart(taskId, partId);
+		} catch (BusinessException e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<Task>(persisted, HttpStatus.OK);
+	}
+
+	/**
 	 * This method responds to REST calls to delete a specific {@link Task}
 	 * object.
 	 * 

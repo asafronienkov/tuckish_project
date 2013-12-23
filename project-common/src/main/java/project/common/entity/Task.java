@@ -1,8 +1,10 @@
 package project.common.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -39,9 +41,9 @@ public class Task extends Named implements Comparable<Task> {
 	@ManyToOne(optional = false)
 	private Project project;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "TASK_PART", joinColumns = { @JoinColumn(name = "TASK_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "PART_ID", referencedColumnName = "ID") })
-	private Set<Part> parts;
+	private Set<Part> parts = new HashSet<Part>();
 
 	public String getDescription() {
 		return description;
