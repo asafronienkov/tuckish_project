@@ -124,15 +124,16 @@ $(document).ready(function() {
 	$("#partsGrid").jqGrid({
 		url:'app/parts/task?id=' + taskId,
 		datatype: "json",
-		colNames:['ID', 'ACTION', 'NAME', 'MANUFACTURER', 'NUMBER', 'COST', 'WEIGHT'],
+		colNames:['ID', 'ACTION', 'MANUFACTURER', 'NAME', 'NUMBER', 'COST', 'WEIGHT', 'TYPE'],
 		colModel:[
 			{name: 'id', index: 'id', hidden: true},
-			{name: 'act', index: 'act', width: 110},
+			{name: 'act', index: 'act', width: 120, fixed: true, align: 'center'},
+			{name: 'manufacturer', index: 'manufacturer', width: 175, fixed: true, align: 'center'},
 			{name: 'name', index: 'name'},
-			{name: 'manufacturer', index: 'manufacturer'},
-			{name: 'number', index: 'number'},
-			{name: 'cost', index: 'cost'},
-			{name: 'weight', index: 'weight'}
+			{name: 'number', index: 'number', width: 125, fixed: true, align: 'center'},
+			{name: 'cost', index: 'cost', width: 50, fixed: true, align: 'center'},
+			{name: 'weight', index: 'weight', width: 50, fixed: true, align: 'center'},
+			{name: 'type', index: 'type', width: 125, fixed: true, align: 'center', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }}
         ],
         rowNum: 10,
         rowList: [10, 20, 30],

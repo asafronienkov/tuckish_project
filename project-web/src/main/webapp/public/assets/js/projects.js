@@ -76,12 +76,12 @@ $(document).ready(function() {
 		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'TYPE', 'START', 'END'],
 		colModel:[
 			{name: 'id', index: 'id', hidden: true},
-			{name: 'act', index: 'act', width: 110},
-			{name: 'name', index: 'name'},
+			{name: 'act', index: 'act', width: 120, fixed: true, align: 'center'},
+			{name: 'name', index: 'name', width: 125, fixed: true, align: 'center'},
 			{name: 'description', index: 'description'},
-			{name: 'type', index: 'type', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }},
-			{name: 'startDate', index: 'startDate'},
-			{name: 'endDate', index: 'endDate'}
+			{name: 'type', index: 'type', width: 125, fixed: true, align: 'center', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }},
+			{name: 'startDate', index: 'startDate', width: 125, fixed: true, align: 'center'},
+			{name: 'endDate', index: 'endDate', width: 125, fixed: true, align: 'center'}
         ],
         rowNum: 10,
         rowList: [10, 20, 30],
@@ -90,6 +90,7 @@ $(document).ready(function() {
         autowidth: true,
         sortname: 'id',
         viewrecords: true,
+        shrinkToFit: true,
         sortorder: "desc",
         caption: "Projects",
         gridComplete: function() {
@@ -110,18 +111,19 @@ $(document).ready(function() {
 		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'START', 'END', 'LOE'],
 		colModel:[
 			{name: 'id', index: 'id', hidden: true},
-			{name: 'act', index: 'act', width: 110},
-			{name: 'name', index: 'name'},
+			{name: 'act', index: 'act', width: 120, fixed: true, align: 'center'},
+			{name: 'name', index: 'name', width: 125, fixed: true, align: 'center'},
 			{name: 'description', index: 'description'},
-			{name: 'startDate', index: 'startDate'},
-			{name: 'endDate', index: 'endDate'},
-			{name: 'levelOfEffort', index: 'levelOfEffort'}
+			{name: 'startDate', index: 'startDate', width: 125, fixed: true, align: 'center'},
+			{name: 'endDate', index: 'endDate', width: 125, fixed: true, align: 'center'},
+			{name: 'levelOfEffort', index: 'levelOfEffort', width: 50, fixed: true, align: 'center'}
         ],
         rowNum: 10,
         rowList: [10, 20, 30],
         pager: '#tasksPager',
         height: 150,
         autowidth: true,
+        shrinkToFit: true,
         sortname: 'id',
         viewrecords: true,
         sortorder: "desc",
@@ -141,19 +143,21 @@ $(document).ready(function() {
 	$("#partsGrid").jqGrid({
 		url:'app/parts/all',
 		datatype: "json",
-		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'TYPE'],
+		colNames:['ID', 'ACTION', 'MANUFACTURER', 'NAME', 'DESCRIPTION', 'TYPE'],
 		colModel:[
 			{name: 'id', index: 'id', hidden: true},
-			{name: 'act', index: 'act', width: 110},
-			{name: 'name', index: 'name'},
+			{name: 'act', index: 'act', width: 120, fixed: true, align: 'center'},
+			{name: 'manufacturer', index: 'manufacturer', width: 175, fixed: true, align: 'center'},
+			{name: 'name', index: 'name', width: 125, fixed: true, align: 'center'},
 			{name: 'description', index: 'description'},
-			{name: 'type', index: 'type', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }}
+			{name: 'type', index: 'type', width: 125, fixed: true, align: 'center', formatter: function(cellvalue, opts, rowObj) { return cellvalue.name; }}
         ],
         rowNum: 10,
         rowList: [10, 20, 30],
         pager: '#partsPager',
         height: 150,
         autowidth: true,
+        shrinkToFit: true,
         sortname: 'id',
         viewrecords: true,
         sortorder: "desc",

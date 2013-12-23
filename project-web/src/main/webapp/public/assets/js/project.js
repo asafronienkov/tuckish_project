@@ -122,12 +122,12 @@ $(document).ready(function() {
 		colNames:['ID', 'ACTION', 'NAME', 'DESCRIPTION', 'START', 'END', 'LOE'],
 		colModel:[
 			{name: 'id', index: 'id', hidden: true},
-			{name: 'act', index: 'act', width: 110},
-			{name: 'name', index: 'name'},
+			{name: 'act', index: 'act', width: 120, fixed: true, align: 'center'},
+			{name: 'name', index: 'name', width: 125, fixed: true, align: 'center'},
 			{name: 'description', index: 'description'},
-			{name: 'startDate', index: 'startDate'},
-			{name: 'endDate', index: 'endDate'},
-			{name: 'levelOfEffort', index: 'levelOfEffort'}
+			{name: 'startDate', index: 'startDate', width: 125, fixed: true, align: 'center'},
+			{name: 'endDate', index: 'endDate', width: 125, fixed: true, align: 'center'},
+			{name: 'levelOfEffort', index: 'levelOfEffort', width: 50, fixed: true, align: 'center'}
         ],
         rowNum: 10,
         rowList: [10, 20, 30],
