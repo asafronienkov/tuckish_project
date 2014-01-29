@@ -23,8 +23,9 @@ public class View {
 	private BaseDao dao;
 
 	/**
+	 * Responds to requests for the home page view
 	 * 
-	 * @return
+	 * @return {@link ModelAndView} with the view of 'home'
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView loadHome() {
@@ -32,8 +33,9 @@ public class View {
 	}
 
 	/**
+	 * Responds to requests for the projects page view
 	 * 
-	 * @return
+	 * @return {@link ModelAndView} with the view of 'projects'
 	 */
 	@RequestMapping(value = "/projects", method = RequestMethod.GET)
 	public ModelAndView loadProjects() {

@@ -137,10 +137,14 @@ public class Tasks {
 	}
 
 	/**
+	 * This method responds to REST calls to add a {@link Part} to a specific
+	 * {@link Task}
 	 * 
 	 * @param taskId
+	 *            the id of the Task to add the part to
 	 * @param partId
-	 * @return
+	 *            the id of the existing Part
+	 * @return the updated {@link Task} containing the new associated Part
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/addPart", method = RequestMethod.POST, produces = "application/json")
