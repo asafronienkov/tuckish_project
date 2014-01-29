@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
-	<mapping path="/*" decorator="/WEB-INF/decorators/main-layout.jsp" />
+	<mapping path="/login" exclude="true" />
+	<mapping path="/loginfailed" exclude="true" />
+	<mapping path="/logout" exclude="true" />
 	<mapping path="/app/*" exclude="true" />
+	<mapping path="/*" decorator="/WEB-INF/decorators/main-layout.jsp" />
 </sitemesh>

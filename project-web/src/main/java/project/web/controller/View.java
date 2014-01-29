@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,8 +29,24 @@ public class View {
 	 * @return {@link ModelAndView} with the view of 'home'
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView loadHome() {
-		return new ModelAndView("home");
+	public String loadRoot(ModelMap model) {
+		return "home";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loadLogin(ModelMap model) {
+		return "login";
+	}
+
+	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
+	public String loadLoginFailed(ModelMap model) {
+		model.addAttribute("error", "true");
+		return "login";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String loadLogout(ModelMap model) {
+		return "login";
 	}
 
 	/**

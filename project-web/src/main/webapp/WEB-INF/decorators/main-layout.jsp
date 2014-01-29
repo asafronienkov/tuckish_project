@@ -101,9 +101,5 @@
 	</div><!-- /.modal -->
 	
 	<sitemesh:write property='body'/>
-
-<!-- 	<div class="navbar navbar-fixed-bottom"> -->
-<%-- 		<c:import url="/WEB-INF/include/footer.jsp" /> --%>
-<!-- 	</div> -->
 </body>
 </html>

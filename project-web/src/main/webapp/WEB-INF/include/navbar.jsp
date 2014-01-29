@@ -22,8 +22,9 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="javascript:void(0)" onclick="openManageTypes();">Manage Types</a></li>
-              </ul>
+              	</ul>
             </li>
+            <li><a href="<c:url value="j_spring_security_logout" />">Logout</a></li>
 		</ul>
 	</div>
 </nav>
